@@ -58,7 +58,7 @@ def get_headers(token):
 
 
 def collect_coin(token, amount):
-    url = 'https://api.yescoin.gold/game/collectCoin'
+    url = 'https://api-backend.yescoin.gold/game/collectCoin'
     headers = get_headers(token)
     data = json.dumps(amount)  # Ensure data is sent as JSON-encoded string
     try:
@@ -84,7 +84,7 @@ def collect_coin(token, amount):
 
 def fetch_account_info(token):
     try:
-        url = 'https://api.yescoin.gold/account/getAccountInfo'
+        url = 'https://api-backend.yescoin.gold/account/getAccountInfo'
         headers = get_headers(token)
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -99,7 +99,7 @@ def fetch_account_info(token):
 
 def fetch_game_info(token):
     try:
-        url = 'https://api.yescoin.gold/game/getGameInfo'
+        url = 'https://api-backend.yescoin.gold/game/getGameInfo'
         headers = get_headers(token)
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -113,7 +113,7 @@ def fetch_game_info(token):
 
 
 def use_special_box(token):
-    url = 'https://api.yescoin.gold/game/recoverSpecialBox'
+    url = 'https://api-backend.yescoin.gold/game/recoverSpecialBox'
     headers = get_headers(token)
     try:
         response = requests.post(url, headers=headers)
@@ -134,7 +134,7 @@ def use_special_box(token):
 
 def fetch_special_box_info(token):
     try:
-        url = 'https://api.yescoin.gold/game/getSpecialBoxInfo'
+        url = 'https://api-backend.yescoin.gold/game/getSpecialBoxInfo'
         headers = get_headers(token)
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -149,7 +149,7 @@ def fetch_special_box_info(token):
 
 def get_my_user_nick(token):
     try:
-        url = 'https://api.yescoin.gold/account/getRankingList?index=1&pageSize=1&rankType=1&userLevel=1'
+        url = 'https://api-backend.yescoin.gold/account/getRankingList?index=1&pageSize=1&rankType=1&userLevel=1'
         headers = get_headers(token)
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -163,7 +163,7 @@ def get_my_user_nick(token):
 
 
 def collect_from_special_box(token, box_type, coin_count):
-    url = 'https://api.yescoin.gold/game/collectSpecialBoxCoin'
+    url = 'https://api-backend.yescoin.gold/game/collectSpecialBoxCoin'
     headers = get_headers(token)
     data = json.dumps({"boxType": box_type, "coinCount": coin_count})
     try:
@@ -204,7 +204,7 @@ def attempt_collect_special_box(token, box_type, initial_coin_count):
 
 def fetch_account_build_info(token):
     try:
-        url = 'https://api.yescoin.gold/build/getAccountBuildInfo'
+        url = 'https://api-backend.yescoin.gold/build/getAccountBuildInfo'
         headers = get_headers(token)
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -222,7 +222,7 @@ def fetch_account_build_info(token):
 
 
 def fetch_squad_info(token):
-    url = 'https://api.yescoin.gold/squad/mySquad'
+    url = 'https://api-backend.yescoin.gold/squad/mySquad'
     headers = get_headers(token)
     try:
         response = requests.get(url, headers=headers)
@@ -238,7 +238,7 @@ def fetch_squad_info(token):
 
 
 def join_squad(token, squad_link):
-    url = 'https://api.yescoin.gold/squad/joinSquad'
+    url = 'https://api-backend.yescoin.gold/squad/joinSquad'
     headers = get_headers(token)
     data = json.dumps({"squadTgLink": squad_link})
     try:
@@ -255,7 +255,7 @@ def join_squad(token, squad_link):
 
 
 def recover_coin_pool(token):
-    url = 'https://api.yescoin.gold/game/recoverCoinPool'
+    url = 'https://api-backend.yescoin.gold/game/recoverCoinPool'
     headers = get_headers(token)
     try:
         response = requests.post(url, headers=headers)
@@ -276,7 +276,7 @@ def recover_coin_pool(token):
 
 
 def fetch_task_list(token):
-    url = 'https://api.yescoin.gold/task/getCommonTaskList'
+    url = 'https://api-backend.yescoin.gold/task/getCommonTaskList'
     headers = get_headers(token)
     try:
         response = requests.get(url, headers=headers)
@@ -294,7 +294,7 @@ def fetch_task_list(token):
 
 
 def finish_task(token, task_id):
-    url = 'https://api.yescoin.gold/task/finishTask'
+    url = 'https://api-backend.yescoin.gold/task/finishTask'
     headers = get_headers(token)
     data = json.dumps(task_id)
     try:
@@ -329,7 +329,7 @@ def process_tasks(token):
 
 def upgrade_level(token, current_level, target_level, upgrade_type):
 
-    url = 'https://api.yescoin.gold/build/levelUp'
+    url = 'https://api-backend.yescoin.gold/build/levelUp'
     headers = get_headers(token)
     data = json.dumps(upgrade_type)
     if upgrade_type == '1':
@@ -508,7 +508,7 @@ def main():
 
         print(f"\n{random.choice(available_colors)+Style.BRIGHT}========={Fore.WHITE+Style.BRIGHT}Semua akun berhasil di proses{Fore.GREEN+Style.BRIGHT}=========", end="", flush=True)
         import sys
-        waktu_tunggu = 15  # 5 menit dalam detik
+        waktu_tunggu = 60  # 5 menit dalam detik
         for detik in range(waktu_tunggu, 0, -1):
             sys.stdout.write(
                 f"\r{Fore.CYAN}Menunggu waktu claim berikutnya dalam {Fore.CYAN}{Fore.WHITE}{detik // 60} menit {Fore.WHITE}{detik % 60} detik")
@@ -521,34 +521,34 @@ def main():
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Blum BOT')
     parser.add_argument('--task', type=str,
-                        choices=['y', 'n'], help='Cek and Claim Task (y/n)')
+                        choices=['y', 'n'], help='Check and Claim Task (y/n)')
     parser.add_argument('--multi', type=str,
                         choices=['y', 'n'], help='Upgrade Multi Value (y/n)')
     parser.add_argument('--fill', type=str,
                         choices=['y', 'n'], help='Upgrade Fill Rate (y/n)')
     parser.add_argument('--max-level', type=int,
-                        help='Level maksimum untuk upgrade (default: 5)')
+                        help='Maximum level for upgrade (default: 5)')
 
     args = parser.parse_args()
 
     if args.task is None:
         task_input = input(
-            "Apakah Anda ingin cek dan claim task? (y/n, default n): ").strip().lower()
+            "Do you want to check and claim tasks? (y/n, default n): ").strip().lower()
         args.task = task_input if task_input in ['y', 'n'] else 'n'
 
     if args.multi is None:
         multi_input = input(
-            "Apakah Anda ingin upgrade multi value? (y/n, default n): ").strip().lower()
+            "Do you want to upgrade multi value? (y/n, default n): ").strip().lower()
         args.multi = multi_input if multi_input in ['y', 'n'] else 'n'
 
     if args.fill is None:
         fill_input = input(
-            "Apakah Anda ingin upgrade fill rate? (y/n, default n): ").strip().lower()
+            "Do you want to upgrade fill rate? (y/n, default n): ").strip().lower()
         args.fill = fill_input if fill_input in ['y', 'n'] else 'n'
 
     if (args.multi == 'y' or args.fill == 'y') and args.max_level is None:
         max_level_input = input(
-            "Masukkan level maksimum untuk upgrade (default: 5): ").strip()
+            "Enter the maximum level for upgrade (default: 5): ").strip()
         args.max_level = int(max_level_input) if max_level_input else 5
     elif args.max_level is None:
         # Default value if max_level is not provided and neither multi nor fill is 'y'
